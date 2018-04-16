@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+            <title> Build a blog </title>
+            <style>
+                .error {color: red;}
+                #div {padding: 10px}
+                .textarea {
+                    margin: 10px 0;
+                    width: 540px;
+                    height: 120px;
+                }
+            </style>
+    </head>
+<body>
+    <div>
+        <a href="/">Main blog page</a>&nbsp;&nbsp;&nbsp;
+        <a href="/newpost">Add blog entry</a>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+    {% block content %}
+        {
+
+        }
+
+    {% endblock %}
+
+</body>
+</html>
