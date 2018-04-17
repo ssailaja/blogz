@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <center>
-<h1>{{blog.title}}</h1>
-<p>{{blog.body}}</p>
+{% for blogs in blog %}
+<h1>{{blogs.title}}</h1>
+<p>{{blogs.body}}</p>
 </center>
-
+{% endfor %}
 
 
 {% endblock %}

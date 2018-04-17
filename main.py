@@ -19,11 +19,14 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
-@app.route('/blog', methods=['GET'])
+
+
+
+@app.route('/blog')
 def blog():
     
     id=request.args.get('id')
-    blog = Blog.query.filter_by(id=id).first()
+    blog = Blog.query.filter_by(id=id).all()
     return render_template('message_form.html', blog=blog)
 
 
@@ -39,6 +42,7 @@ def newpost():
     if request.method=='POST':
         title = request.form['title']
         body = request.form['body']
+        
         if title=="":
             title_error= "title should not be an empty"
         
@@ -50,12 +54,16 @@ def newpost():
         for blog in blogs_list:
             if title==blog.title:
                 title_validation="title already existed" 
-                break
-                        
-        if (not title_error and not body_error and not title_validation):
-            return redirect('/index?title={0}&body={1}'.format(title, body))
+            if (not title_error and not body_error and not title_validation):
+                newpost=Blog(title,body)
+                db.session.add(newpost)
+                db.session.commit()
 
-        
+                post_id = newpost.id
+                post_id = str(post_id)
+
+                return redirect('/blog?id='+post_id)
+                   
     return render_template('submission_form.html', title=title, body=body, 
     title_error=title_error, body_error=body_error,title_validation=title_validation)
 
@@ -69,27 +77,11 @@ def message():
 
     return render_template('list_form.html')
 
-
-blogs=[]
-
 @app.route('/', methods=['POST', 'GET'])
 def index():
     blogs = Blog.query.all()
     
     return render_template('list_form.html', blogs=blogs)
-
-@app.route('/index', methods=['GET'])
-def indexForm():
-    new_title = request.args.get('title')        
-    new_body = request.args.get('body')        
-    new_entry=Blog(new_title, new_body)        
-    db.session.add(new_entry)
-    db.session.commit()
-
-    blogs = Blog.query.all()
-    
-    return render_template('list_form.html', blogs=blogs)
-
 
 
 if __name__ == '__main__':
