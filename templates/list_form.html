@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<center><h1>Build a Blog</h1></center>
+<center><h1>blog posts</h1></center>
 {% for blog in blogs %}
-<input type="hidden" name="blog-id" value="{{blog.id}}">
-<h2><a href ="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
-<p>{{blog.body}}</p>
 
+<h2><a href ="/singleUser?blog_id={{blog.id}}">{{blog.title}}</a></h2>
+<p>{{blog.body}}</p>
+<p>written by <a href="/blog?id={{blog.owner.id}}"><b><I>{{blog.owner.username}}</I></italic></b></a></p>
+<p>Created On : {{blog.date}}</p>
 
 {% endfor %}
 

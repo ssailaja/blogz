@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-            <title> Build a blog </title>
+            <title> blogz </title>
             <style>
                 .error {color: red;}
                 #div {padding: 10px}
@@ -10,22 +10,56 @@
                     width: 540px;
                     height: 120px;
                 }
+                nav ul {
+                    padding: 0;
+                    display: inline-block;
+                }
+
+                nav ul li {
+                    list-style: none;
+                    display: inline-block;
+                    margin-right: 15px;
+                }
+
+                nav #user-account {
+                    float: right;
+                }
+                body {
+                    font-family: sans-serif;
+                    width: 800px;
+                    margin: 0 auto;
+                    padding: 10px;
+                }
             </style>
     </head>
 <body>
+        <nav>
+                <ul id="user-account">
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog">All Posts</a></li>
+                    <li><a href="/newpost">New Post</a></li>
+                    
+                </ul>
+            </nav>
     <div>
-        <a href="/">Main blog page</a>&nbsp;&nbsp;&nbsp;
-        <a href="/newpost">Add blog entry</a>
-        <br/>
-        <br/>
-        <br/>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                <ul>
+                {% for category,message in messages %}
+                    <li class="{{category}}">{{message}}</li>
+                {% endfor %}
+                </ul>
+            {% endwith %}
+
+            {% block content %}
+                {
+
+                }
+
+            {% endblock %}
     </div>
-    {% block content %}
-        {
-
-        }
-
-    {% endblock %}
-
 </body>
 </html>

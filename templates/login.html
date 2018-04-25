@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+
+    
+     <form action="/login" method="POST">
+        <table cellspacing="5" cellpadding="5">
+            <tr>
+                <td colspan="2">
+                    <h1>login</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="username">Username</label></td>
+                <td>
+                    <input type="text" name="username" value="{{username}}"/>
+                </td>
+                
+            </tr>
+        
+            <tr>
+                <td>
+                    <label for="password">Password</label></td>
+                <td>
+                    <input type="password" name="password" value="{{password}}"/>
+                </td>
+                
+            </tr>
+                            
+            
+            <tr>
+                <td colspan="2" align="right">
+                    <input type="submit" value="Submit"/>
+                </td>
+                <td></td>
+            </tr>
+                                    
+        </table>
+     </form>  
+     <p>Don't have an account? <a href="/signup">Create Account</a></p>      
+     {% endblock %}
